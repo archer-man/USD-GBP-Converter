@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,26 +17,36 @@ public class Converter {
                 + "4 - Exit program");
         try (var reader = new BufferedReader(new InputStreamReader(System.in))) {
             var done = false;
+            var pattern = Pattern.compile("^(\\d+)$");
             do {
                 var cmd = reader.readLine();
                 if (cmd.equals("1")) {
                     printConversionRate();
                 } else if (cmd.equals("2")) {
                     System.out.println("Type in USD amount");
-                    convertToGBP(Double.parseDouble(reader.readLine()));
+                    try {
+                        convertToGBP(Double.parseDouble(reader.readLine()));
+                    } catch (NumberFormatException e) {
+                        System.out.print("Wrong input format. You need to type in the number\n"
+                                + "Returned to Main Menu. Type in the number of command\n");
+                    }
                 } else if (cmd.equals("3")) {
                     System.out.println("Type in GBP amount");
-                    convertToUSD(Double.parseDouble(reader.readLine()));
+                    try {
+                        convertToUSD(Double.parseDouble(reader.readLine()));
+                    } catch (NumberFormatException e) {
+                        System.out.print("Wrong input format. You need to type in the number\n"
+                                + "Returned to Main Menu. Type in the number of command\n");
+                    }
                 } else if (cmd.equals("4")) {
                     done = true;
                 } else {
-                    System.out.println("Improper command");
+                    System.out.println("Improper command number. Type in number of command.");
                 }
             } while (!done);
         } catch (IOException e) {
             throw new RuntimeException("#INTERNAL", e);
         }
-
     }
 
     public static void printConversionRate() {
