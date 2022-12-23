@@ -12,7 +12,8 @@ public class Converter {
         System.out.println("\nType in the corresponding number of command in order to select it:\n"
                 + "1 - Show the current conversion rate\n"
                 + "2 - Convert USD to GBP\n"
-                + "3 - Exit program");
+                + "3 - Convert GBP to USD\n"
+                + "4 - Exit program");
         try (var reader = new BufferedReader(new InputStreamReader(System.in))) {
             var done = false;
             do {
@@ -23,6 +24,9 @@ public class Converter {
                     System.out.println("Type in USD amount");
                     convertToGBP(Double.parseDouble(reader.readLine()));
                 } else if (cmd.equals("3")) {
+                    System.out.println("Type in GBP amount");
+                    convertToUSD(Double.parseDouble(reader.readLine()));
+                } else if (cmd.equals("4")) {
                     done = true;
                 } else {
                     System.out.println("Improper command");
@@ -53,8 +57,15 @@ public class Converter {
     public static void convertToGBP(double usdValue) throws IOException {
         var rate = getCurrencyRate();
         var gbpAmount = usdValue * rate;
-        System.out.printf("Rate is %.4f GBP\n"
+        System.out.printf("Rate is 1 USD = %.4f GBP\n"
                 + "Total amount: %f USD * %.4f GBP = %f GBP\n", rate, usdValue, rate, gbpAmount);
+    }
+
+    public static void convertToUSD(double gbpValue) throws IOException {
+        var rate = 1.0 / getCurrencyRate();
+        var usdAmount = gbpValue * rate;
+        System.out.printf("Rate is 1 GBP = %.4f USD\n"
+                + "Total amount: %f GBP * %.4f USD = %f USD\n", rate, gbpValue, rate, usdAmount);
     }
 }
 
