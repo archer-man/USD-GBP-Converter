@@ -70,6 +70,7 @@ public class Converter {
         var gbpAmount = usdValue * rate;
         System.out.printf("Rate is 1 USD = %.4f GBP\n"
                 + "Total amount: %f USD * %.4f GBP = %f GBP\n", rate, usdValue, rate, gbpAmount);
+        System.out.printf("Nearest whole number is %d GBP\n", Math.round(gbpAmount));
     }
 
     public static void convertToUSD(double gbpValue) throws IOException {
@@ -77,6 +78,7 @@ public class Converter {
         var usdAmount = gbpValue * rate;
         System.out.printf("Rate is 1 GBP = %.4f USD\n"
                 + "Total amount: %f GBP * %.4f USD = %f USD\n", rate, gbpValue, rate, usdAmount);
+        System.out.printf("Nearest whole number is %d USD\n", Math.round(usdAmount));
     }
 }
 
