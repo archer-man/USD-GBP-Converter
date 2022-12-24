@@ -1,3 +1,5 @@
+![workflow status for main](https://github.com/archer-man/USD_GBP_Converter/actions/workflows/manual.yml/badge.svg?branch=main) (main)
+![workflow status for develop](https://github.com/archer-man/USD_GBP_Converter/actions/workflows/manual.yml/badge.svg?branch=develop) (develop)
 # USD-GBP-Converter
 Utility that converts USD to GBP and vice-versa using actual conversion rate.
 
