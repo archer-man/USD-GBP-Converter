@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import static org.junit.Assert.*;
 
@@ -26,9 +27,10 @@ public class FirstUseCaseTest {
 
     @Test
     public void testGetConversionRate() {
-        DecimalFormat df = new DecimalFormat("#.####");
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        DecimalFormat df = new DecimalFormat("#.####", symbols);
         var rate = Converter.getCurrencyRate();
-        String trueString = "1 USD = " + df.format(rate).replace(".", ",") + " GBP\n";
+        String trueString = "1 USD = " + df.format(rate) + " GBP\n";
         Converter.printConversionRate();
         assertEquals(trueString, outContent.toString());
     }
