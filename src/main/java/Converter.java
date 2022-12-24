@@ -49,8 +49,8 @@ public class Converter {
         }
     }
 
-    public static void printConversionRate() {
-        System.out.printf("1 USD = %.4f GBP\n", getCurrencyRate());
+    public static String printConversionRate() {
+        return System.out.printf("1 USD = %.4f GBP\n", getCurrencyRate()).toString();
     }
 
     public static double getCurrencyRate() {
@@ -65,20 +65,22 @@ public class Converter {
         return rate;
     }
 
-    public static void convertToGBP(double usdValue) throws IOException {
+    public static double convertToGBP(double usdValue) throws IOException {
         var rate = getCurrencyRate();
         var gbpAmount = usdValue * rate;
         System.out.printf("Rate is 1 USD = %.4f GBP\n"
                 + "Total amount: %f USD * %.4f GBP = %f GBP\n", rate, usdValue, rate, gbpAmount);
         System.out.printf("Nearest whole number is %d GBP\n", Math.round(gbpAmount));
+        return gbpAmount;
     }
 
-    public static void convertToUSD(double gbpValue) throws IOException {
+    public static double convertToUSD(double gbpValue) throws IOException {
         var rate = 1.0 / getCurrencyRate();
         var usdAmount = gbpValue * rate;
         System.out.printf("Rate is 1 GBP = %.4f USD\n"
                 + "Total amount: %f GBP * %.4f USD = %f USD\n", rate, gbpValue, rate, usdAmount);
         System.out.printf("Nearest whole number is %d USD\n", Math.round(usdAmount));
+        return usdAmount;
     }
 }
 
