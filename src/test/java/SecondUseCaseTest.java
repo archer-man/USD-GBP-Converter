@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.io.*;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,9 +30,10 @@ public class SecondUseCaseTest {
 
     @Test
     public void testGetConversionRate() {
-        DecimalFormat df = new DecimalFormat("#.####");
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        DecimalFormat df = new DecimalFormat("#.####", symbols);
         var rate = Converter.getCurrencyRate();
-        String trueString = "1 USD = " + df.format(rate).replace(".", ",") + " GBP\n";
+        String trueString = "1 USD = " + df.format(rate) + " GBP\n";
         Converter.printConversionRate();
         assertEquals(trueString, outContent.toString());
     }
